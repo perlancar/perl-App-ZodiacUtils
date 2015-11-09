@@ -11,14 +11,17 @@ our %SPEC;
 
 $SPEC{zodiac_of} = {
     v => 1.1,
-    summary => 'Show zodiac for one or more dates',
+    summary => 'Show zodiac for a date',
     args => {
+        # dates => {
         date => {
-            summary => 'Dates',
-            schema => ['array*', of=>'date*', min_len=>1],
+            summary => 'Date',
+            #schema => ['array*', of=>'date*', min_len=>1],
+            schema => 'date*',
             'x.perl.coerce_to' => 'DateTime',
             req => 1,
             pos => 0,
+            #greedy => 1,
         },
     },
 };
@@ -26,7 +29,8 @@ sub zodiac_of {
     require DateTime::Event::Zodiac;
     my %args = @_;
 
-    my $dates = $args{date};
+    #my $dates = $args{dates};
+    my $dates = [$args{date}];
 
     my $res = [];
     for my $date (@$dates) {
