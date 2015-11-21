@@ -29,6 +29,7 @@ $SPEC{zodiac_of} = {
         {
             args => {date=>'2015-06-15'},
             result => 'gemini',
+            test => 0, # at the time of this writing, Test::Rinci hasn't used Perinci::Sub::CoerceArgs
         },
     ],
 };
@@ -80,7 +81,8 @@ sub chinese_zodiac_of {
 
     my $res = [];
     for my $date (@$dates) {
-        my $czres = Zodiac::Chinese::Table::chinese_zodiac($date->ymd);
+        my $czres = Zodiac::Chinese::Table::chinese_zodiac(
+            ref($date) ? $date->ymd : $date);
         push @$res, $czres ? "$czres->[7] ($czres->[3])" : undef;
     }
     $res = $res->[0] if @$res == 1;
