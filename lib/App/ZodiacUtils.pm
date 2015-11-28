@@ -13,15 +13,15 @@ $SPEC{zodiac_of} = {
     v => 1.1,
     summary => 'Show zodiac for a date',
     args => {
-        # dates => {
-        date => {
-            summary => 'Date',
+        dates => {
+            summary => 'Dates',
+            'x.name.is_plural' => 1,
             #schema => ['array*', of=>'date*', min_len=>1],
-            schema => 'date*',
-            'x.perl.coerce_to' => 'DateTime',
+            schema => ['array*', of=>'str*', min_len=>1],
+            #'x.perl.coerce_to' => 'int(epoch)',
             req => 1,
             pos => 0,
-            #greedy => 1,
+            greedy => 1,
         },
     },
     result_naked => 1,
@@ -37,12 +37,16 @@ sub zodiac_of {
     require Zodiac::Tiny;
     my %args = @_;
 
-    #my $dates = $args{dates};
-    my $dates = [$args{date}];
+    my $dates = $args{dates};
 
     my $res = [];
     for my $date (@$dates) {
-        push @$res, Zodiac::Tiny::zodiac_of($date);
+        unless ($date =~ /\A\d\d\d\d-\d\d-\d\d\z/) {
+            warn "Invalid date '$date'\n";
+            next;
+        }
+        my $z = Zodiac::Tiny::zodiac_of($date);
+        push @$res, @$dates > 1 ? [$date, $z] : $z;
     }
     $res = $res->[0] if @$res == 1;
     $res;
@@ -52,15 +56,15 @@ $SPEC{chinese_zodiac_of} = {
     v => 1.1,
     summary => 'Show Chinese zodiac for a date',
     args => {
-        # dates => {
-        date => {
-            summary => 'Date',
+        dates => {
+            summary => 'Dates',
+            'x.name.is_plural' => 1,
             #schema => ['array*', of=>'date*', min_len=>1],
-            schema => 'date*',
-            'x.perl.coerce_to' => 'DateTime',
+            schema => ['array*', of=>'str*', min_len=>1],
+            #'x.perl.coerce_to' => 'int(epoch)',
             req => 1,
             pos => 0,
-            #greedy => 1,
+            greedy => 1,
         },
     },
     result_naked => 1,
@@ -76,14 +80,17 @@ sub chinese_zodiac_of {
     require Zodiac::Chinese::Table;
     my %args = @_;
 
-    #my $dates = $args{dates};
-    my $dates = [$args{date}];
+    my $dates = $args{dates};
 
     my $res = [];
     for my $date (@$dates) {
-        my $czres = Zodiac::Chinese::Table::chinese_zodiac(
-            ref($date) ? $date->ymd : $date);
-        push @$res, $czres ? "$czres->[7] ($czres->[3])" : undef;
+        unless ($date =~ /\A\d\d\d\d-\d\d-\d\d\z/) {
+            warn "Invalid date '$date'\n";
+            next;
+        }
+        my $czres = Zodiac::Chinese::Table::chinese_zodiac($date);
+        my $z = $czres ? "$czres->[7] ($czres->[3])" : undef;
+        push @$res, @$dates > 1 ? [$date, $z] : $z;
     }
     $res = $res->[0] if @$res == 1;
     $res;
