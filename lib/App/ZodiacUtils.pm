@@ -27,7 +27,7 @@ $SPEC{zodiac_of} = {
     result_naked => 1,
     examples => [
         {
-            args => {date=>'2015-06-15'},
+            args => {dates=>['2015-06-15']},
             result => 'gemini',
             test => 0, # at the time of this writing, Test::Rinci hasn't used Perinci::Sub::CoerceArgs
         },
@@ -70,7 +70,7 @@ $SPEC{chinese_zodiac_of} = {
     result_naked => 1,
     examples => [
         {
-            args => {date=>'1980-02-17'},
+            args => {dates=>['1980-02-17']},
             result => 'monkey (metal)',
         },
     ],

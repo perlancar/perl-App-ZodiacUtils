@@ -1,5 +1,11 @@
 Revision history for App-ZodiacUtils
 
+0.04    2015-11-28 (PERLANCAR)
+
+	- Switch to Perinci::CmdLine::Inline for faster startup, allow
+	  multiple arguments.
+
+
 0.03    2015-11-28 (PERLANCAR)
 
 	- No functional changes.
