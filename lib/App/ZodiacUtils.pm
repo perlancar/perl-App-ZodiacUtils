@@ -34,7 +34,7 @@ $SPEC{zodiac_of} = {
     ],
 };
 sub zodiac_of {
-    require DateTime::Event::Zodiac;
+    require Zodiac::Tiny;
     my %args = @_;
 
     #my $dates = $args{dates};
@@ -42,7 +42,7 @@ sub zodiac_of {
 
     my $res = [];
     for my $date (@$dates) {
-        push @$res, DateTime::Event::Zodiac::zodiac_date_name($date);
+        push @$res, Zodiac::Tiny::zodiac_of($date);
     }
     $res = $res->[0] if @$res == 1;
     $res;
