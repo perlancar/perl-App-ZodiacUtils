@@ -31,6 +31,12 @@ $SPEC{zodiac_of} = {
             result => 'gemini',
             test => 0, # at the time of this writing, Test::Rinci hasn't used Perinci::Sub::CoerceArgs
         },
+        {
+            summary => 'Multiple dates',
+            args => {dates=>['2015-12-17','2015-12-29']},
+            result => [["2015-12-17","sagittarius"], ["2015-12-29","capricornus"]],
+            test => 0,
+        }
     ],
 };
 sub zodiac_of {
@@ -73,6 +79,12 @@ $SPEC{chinese_zodiac_of} = {
             args => {dates=>['1980-02-17']},
             result => 'monkey (metal)',
         },
+        {
+            summary => 'Multiple dates',
+            args => {dates=>['2015-12-17','2016-12-17']},
+            result => [["2015-12-17","goat (wood)"], ["2016-12-17","monkey (fire)"]],
+            test => 0,
+        }
     ],
 
 };
