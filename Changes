@@ -4,8 +4,9 @@ Revision history for App-ZodiacUtils
 
 	- No functional changes.
 
-        - [build] Rebuild with updated Perinci::Sub::ConvertArgs::Argv (0.07)
-          and Perinci::Sub::To::CLIDocData (0.24) which produces nicer/correct
+        - [build] Rebuild with updated Pod::Weaver::Plugin::Rinci (0.50),
+          Perinci::Sub::ConvertArgs::Argv (0.07), and
+          Perinci::Sub::To::CLIDocData (0.24) which produces nicer/correct
           command-line in examples.
 
 
