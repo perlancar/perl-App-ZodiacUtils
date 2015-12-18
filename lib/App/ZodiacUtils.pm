@@ -33,6 +33,12 @@ $SPEC{zodiac_of} = {
         },
         {
             summary => 'Multiple dates',
+            description => <<'_',
+
+If multiple dates are specified, the result will include the date to
+differentiate which zodiac belongs to which date.
+
+_
             args => {dates=>['2015-12-17','2015-12-29']},
             result => [["2015-12-17","sagittarius"], ["2015-12-29","capricornus"]],
             test => 0,
