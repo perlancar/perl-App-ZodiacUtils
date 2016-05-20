@@ -51,12 +51,10 @@ sub zodiac_of {
 
     my $res = [];
     for my $date (@$dates) {
-        unless ($date =~ /\A\d\d\d\d-\d\d-\d\d\z/) {
-            warn "Invalid date '$date'\n";
-            next;
-        }
-        my $z = Zodiac::Tiny::zodiac_of($date);
-        push @$res, @$dates > 1 ? [$date, $z] : $z;
+        my @lt = localtime($date);
+        my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4]+1, $lt[3]);
+        my $z = Zodiac::Tiny::zodiac_of($ymd);
+        push @$res, @$dates > 1 ? [$ymd, $z] : $z;
     }
     $res = $res->[0] if @$res == 1;
     $res;
@@ -98,13 +96,11 @@ sub chinese_zodiac_of {
 
     my $res = [];
     for my $date (@$dates) {
-        unless ($date =~ /\A\d\d\d\d-\d\d-\d\d\z/) {
-            warn "Invalid date '$date'\n";
-            next;
-        }
-        my $czres = Zodiac::Chinese::Table::chinese_zodiac($date);
+        my @lt = localtime($date);
+        my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4]+1, $lt[3]);
+        my $czres = Zodiac::Chinese::Table::chinese_zodiac($ymd);
         my $z = $czres ? "$czres->[7] ($czres->[3])" : undef;
-        push @$res, @$dates > 1 ? [$date, $z] : $z;
+        push @$res, @$dates > 1 ? [$ymd, $z] : $z;
     }
     $res = $res->[0] if @$res == 1;
     $res;
