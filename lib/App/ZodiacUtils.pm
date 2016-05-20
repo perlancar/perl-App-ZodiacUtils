@@ -16,9 +16,7 @@ $SPEC{zodiac_of} = {
         dates => {
             summary => 'Dates',
             'x.name.is_plural' => 1,
-            #schema => ['array*', of=>'date*', min_len=>1],
-            schema => ['array*', of=>'str*', min_len=>1],
-            #'x.perl.coerce_to' => 'int(epoch)',
+            schema => ['array*', of=>'date*', min_len=>1],
             req => 1,
             pos => 0,
             greedy => 1,
@@ -71,9 +69,7 @@ $SPEC{chinese_zodiac_of} = {
         dates => {
             summary => 'Dates',
             'x.name.is_plural' => 1,
-            #schema => ['array*', of=>'date*', min_len=>1],
-            schema => ['array*', of=>'str*', min_len=>1],
-            #'x.perl.coerce_to' => 'int(epoch)',
+            schema => ['array*', of=>'date*', min_len=>1],
             req => 1,
             pos => 0,
             greedy => 1,
