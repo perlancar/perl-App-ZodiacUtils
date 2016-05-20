@@ -52,7 +52,7 @@ sub zodiac_of {
     my $res = [];
     for my $date (@$dates) {
         my @lt = localtime($date);
-        my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4], $lt[3]);
+        my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4]+1, $lt[3]);
         my $z = Zodiac::Tiny::zodiac_of($ymd);
         push @$res, @$dates > 1 ? [$ymd, $z] : $z;
     }
@@ -97,7 +97,7 @@ sub chinese_zodiac_of {
     my $res = [];
     for my $date (@$dates) {
         my @lt = localtime($date);
-        my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4], $lt[3]);
+        my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4]+1, $lt[3]);
         my $czres = Zodiac::Chinese::Table::chinese_zodiac($ymd);
         my $z = $czres ? "$czres->[7] ($czres->[3])" : undef;
         push @$res, @$dates > 1 ? [$ymd, $z] : $z;
