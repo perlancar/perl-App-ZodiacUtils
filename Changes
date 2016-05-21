@@ -1,5 +1,13 @@
 Revision history for App-ZodiacUtils
 
+0.09    2016-05-21 (PERLANCAR) (unreleased)
+
+        - [ux] Add coercion rule 'date::str_alami_en' for convenience, so we can
+          now say e.g. 'zodiac-of today'.
+
+        - Switch CLI to Perinci::CmdLine::Lite for now.
+
+
 0.08    2016-01-18 (PERLANCAR)
 
         - No functional changes.
