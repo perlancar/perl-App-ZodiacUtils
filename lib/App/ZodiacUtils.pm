@@ -35,7 +35,6 @@ $SPEC{zodiac_of} = {
         {
             args => {dates=>['2015-06-15']},
             result => 'gemini',
-            test => 0, # at the time of this writing, Test::Rinci hasn't used Perinci::Sub::CoerceArgs
         },
         {
             summary => 'Multiple dates',
@@ -47,7 +46,6 @@ differentiate which zodiac belongs to which date.
 _
             args => {dates=>['2015-12-17','2015-12-29']},
             result => [["2015-12-17","sagittarius"], ["2015-12-29","capricornus"]],
-            test => 0,
         }
     ],
 };
