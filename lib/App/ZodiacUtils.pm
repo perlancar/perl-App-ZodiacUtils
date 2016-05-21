@@ -9,6 +9,14 @@ use warnings;
 
 our %SPEC;
 
+my $sch_array_of_dates = ['array*', {
+    of=>['date*', {
+        'x.perl.coerce_to' => 'DateTime',
+        'x.perl.coerce_from'=>['str_alami_en'],
+    }],
+    min_len=>1,
+}];
+
 $SPEC{zodiac_of} = {
     v => 1.1,
     summary => 'Show zodiac for a date',
@@ -16,7 +24,7 @@ $SPEC{zodiac_of} = {
         dates => {
             summary => 'Dates',
             'x.name.is_plural' => 1,
-            schema => ['array*', of=>'date*', min_len=>1],
+            schema => $sch_array_of_dates,
             req => 1,
             pos => 0,
             greedy => 1,
@@ -51,8 +59,14 @@ sub zodiac_of {
 
     my $res = [];
     for my $date (@$dates) {
-        my @lt = localtime($date);
-        my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4]+1, $lt[3]);
+
+        # when coerced to float(epoch)
+        #my @lt = localtime($date);
+        #my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4]+1, $lt[3]);
+
+        # when coerced to DateTime
+        my $ymd = $date->ymd;
+
         my $z = Zodiac::Tiny::zodiac_of($ymd);
         push @$res, @$dates > 1 ? [$ymd, $z] : $z;
     }
@@ -67,7 +81,7 @@ $SPEC{chinese_zodiac_of} = {
         dates => {
             summary => 'Dates',
             'x.name.is_plural' => 1,
-            schema => ['array*', of=>'date*', min_len=>1],
+            schema => $sch_array_of_dates,
             req => 1,
             pos => 0,
             greedy => 1,
@@ -96,8 +110,14 @@ sub chinese_zodiac_of {
 
     my $res = [];
     for my $date (@$dates) {
-        my @lt = localtime($date);
-        my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4]+1, $lt[3]);
+
+        # when coerced to float(epoch)
+        #my @lt = localtime($date);
+        #my $ymd = sprintf("%04d-%02d-%02d", $lt[5]+1900, $lt[4]+1, $lt[3]);
+
+        # when coerced to DateTime
+        my $ymd = $date->ymd;
+
         my $czres = Zodiac::Chinese::Table::chinese_zodiac($ymd);
         my $z = $czres ? "$czres->[7] ($czres->[3])" : undef;
         push @$res, @$dates > 1 ? [$ymd, $z] : $z;
