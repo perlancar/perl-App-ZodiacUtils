@@ -12,7 +12,7 @@ our %SPEC;
 my $sch_array_of_dates = ['array*', {
     of=>['date*', {
         'x.perl.coerce_to' => 'DateTime',
-        'x.perl.coerce_from'=>['str_alami_en'],
+        'x.perl.coerce_rules'=>['str_alami_en'],
     }],
     min_len=>1,
 }];
