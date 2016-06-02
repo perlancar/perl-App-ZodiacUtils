@@ -1,5 +1,12 @@
 Revision history for App-ZodiacUtils
 
+0.10    2016-06-02 (PERLANCAR)
+
+        - No functional changes.
+
+        - [build] Rebuild to fix startup overhead degradation.
+
+
 0.09    2016-06-02 (PERLANCAR)
 
         - [ux] Add coercion rule 'str_alami_en' to allow things like: 'zodiac-of
