@@ -1,6 +1,8 @@
 package App::ZodiacUtils;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use 5.010001;
@@ -12,7 +14,7 @@ our %SPEC;
 my $sch_array_of_dates = ['array*', {
     of=>['date*', {
         'x.perl.coerce_to' => 'DateTime',
-        'x.perl.coerce_rules'=>['str_alami_en'],
+        'x.perl.coerce_rules'=>['From_str::alami_en'],
     }],
     min_len=>1,
 }];
