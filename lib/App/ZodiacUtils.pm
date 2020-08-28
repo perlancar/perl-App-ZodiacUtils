@@ -50,6 +50,9 @@ _
             result => [["2015-12-17","sagittarius"], ["2015-12-29","capricornus"]],
         }
     ],
+    links => [
+        {url=>'prog:chinese-zodiac-of'},
+    ],
 };
 sub zodiac_of {
     require Zodiac::Tiny;
@@ -100,7 +103,9 @@ $SPEC{chinese_zodiac_of} = {
             test => 0,
         }
     ],
-
+    links => [
+        {url=>'prog:zodiac-of'},
+    ],
 };
 sub chinese_zodiac_of {
     require Zodiac::Chinese::Table;
